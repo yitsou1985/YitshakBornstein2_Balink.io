@@ -1,0 +1,53 @@
+body{
+    /* text-align: center; */
+    background-color: linen;
+    padding:10rem;
+    
+   
+     }
+      
+   #consolidated_weather{
+        text-align: right;
+         margin:auto;
+         height: 10px 10px;
+         /* width: 10%; */
+        /* padding: 0.5rem; */
+        background-color: linen;
+
+    
+   }  
+       
+#input,#button{
+   font: 1rem "Arial";
+    padding: 1rem;
+    border: 0.1rem #808080 solid;
+    border-radius: 0.5rem;
+    background-color: #f0c040;
+    /* background-color: aqua; */
+    cursor:context-menu ;
+    outline: none; 
+   text-align: center;
+}
+
+.DisplayScreen{
+   display: "flex";
+   column-count:5;
+  
+   margin:auto
+
+}
+.City{
+    text-align:left;
+   
+}
+.show{
+    text-align: center;
+  
+}
+.button{
+   
+}
+.hr{
+
+    
+}
