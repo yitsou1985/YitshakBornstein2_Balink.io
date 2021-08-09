@@ -12,78 +12,94 @@ function inputvalue(e) {
 
 function data_get() {
   let valuinput = input.value;
+
   fetch(
     `https://www.metaweather.com/api/location/search/?query=${valuinput}&units=metric`
   )
     .then((res) => {
       return res.json();
     })
-    .then(woeid_data);
-}
-function woeid_data(res) {
-  let wooeid = res[0].woeid;
-  fetch(`https://www.metaweather.com/api/location/${wooeid}`)
-    .then((data) => {
-      return data.json();
-    })
-    .then(displayBis);
-}
+    .then(woeid_data)
 
-function displayBis(data) {
-  console.log(data);
-  let d = data.consolidated_weather.length;
-  for (let i = 0; i < d; i++) {
-    // console.log(d);
-    console.log(i);
-    const cityAnd = document.querySelector(".City");
+    .catch((error) => {
+      input.value = "";
+      alert("Please enter a valid City");
+      // let erri = document.querySelector(".not_good")
+      //  erri.textContent = "Please enter a valid City"
+    });
 
-    const Date = document.querySelectorAll(".Date");
-    const Temp = document.querySelectorAll(".Temp");
-    const Weather = document.querySelectorAll(".Weather");
-    const Humidity = document.querySelectorAll(".Humidity");
-    const Visibilite = document.querySelectorAll(".Visibilite");
-    const Pressure = document.querySelectorAll(".Pressure");
+  function woeid_data(res) {
+    let wooeid = res[0].woeid;
+    // if(res== !wooeid ){
+    console.log(wooeid);
 
-    const timedata = document.querySelector(".time");
-    const sunrize = document.querySelector(".sunrise");
-    const sunzet = document.querySelector(".sunset");
-    //   console.log(data.sun_rise);
-    //   console.log(data.sun_set);
-    //   console.log(data.consolidated_weather[i].weather_state_name);
-    let startIndex = data.time.indexOf("T") + 1;
-    let endIndex = startIndex + 5;
+    fetch(`https://www.metaweather.com/api/location/${wooeid}`)
+      .then((data) => {
+        return data.json();
+      })
+      .then(displayBis)
+      .catch((err) => console.log(""));
 
-    cityAnd.innerHTML = data.title + " " + "(" + data.parent.title + ")";
+    function displayBis(data) {
+      console.log(data);
+      let d = data.consolidated_weather.length;
+      for (let i = 0; i < d; i++) {
+        // console.log(d);
+        console.log(i);
+        const cityAnd = document.querySelector(".City");
 
-    timedata.innerHTML =
-      "<b>Time</b> : " + data.time.substring(startIndex, endIndex);
-    sunrize.innerHTML =
-      "<b>Sun_rise</b> : " + data.sun_rise.substring(startIndex, endIndex);
-    sunzet.innerHTML =
-      "<b>Sun_set</b> : " + data.sun_set.substring(startIndex, endIndex);
+        const Date = document.querySelectorAll(".Date");
+        const Temp = document.querySelectorAll(".Temp");
+        const Weather = document.querySelectorAll(".Weather");
+        const Humidity = document.querySelectorAll(".Humidity");
+        const Visibilite = document.querySelectorAll(".Visibilite");
+        const Pressure = document.querySelectorAll(".Pressure");
 
-    Date[i].innerHTML =
-      "<b>Date</b>: " + data.consolidated_weather[i].applicable_date;
-    Humidity[i].innerHTML =
-      "<b>Humidity</b>: " + data.consolidated_weather[i].humidity;
-    Visibilite[i].innerHTML =
-      "<b>Visibility</b>: " +
-      Math.trunc(data.consolidated_weather[i].visibility) +
-      " miles";
-    Pressure[i].innerHTML =
-      "<b>Pressure</b>: " +
-      Math.trunc(data.consolidated_weather[i].air_pressure) +
-      " mb";
-    Temp[i].innerHTML =
-      "<b>Temp</b>: " + parseInt(data.consolidated_weather[i].the_temp) + "°C";
-    Weather[i].innerHTML =
-      "<b>Weather</b>: " + data.consolidated_weather[i].weather_state_name;
-    let NameAbr = data.consolidated_weather[i].weather_state_abbr;
-    let weathersvg = document.querySelectorAll(".weathersvg");
-    console.log(NameAbr);
-    let URlsvg = `https://www.metaweather.com/static/img/weather/${NameAbr}.svg`;
-    // let URlsvg= `<img src=https://www.metaweather.com/static/img/weather/${NameAbr}.svg>`
-    weathersvg[i].src = URlsvg;
+        const timedata = document.querySelector(".time");
+        const sunrize = document.querySelector(".sunrise");
+        const sunzet = document.querySelector(".sunset");
+        //   console.log(data.sun_rise);
+        //   console.log(data.sun_set);
+        //   console.log(data.consolidated_weather[i].weather_state_name);
+        let startIndex = data.time.indexOf("T") + 1;
+        let endIndex = startIndex + 5;
+
+        cityAnd.innerHTML = data.title + " " + "(" + data.parent.title + ")";
+
+        timedata.innerHTML =
+          "<b>Time</b> : " + data.time.substring(startIndex, endIndex);
+        sunrize.innerHTML =
+          "<b>Sun_rise</b> : " + data.sun_rise.substring(startIndex, endIndex);
+        sunzet.innerHTML =
+          "<b>Sun_set</b> : " + data.sun_set.substring(startIndex, endIndex);
+
+        Date[i].innerHTML =
+          "<b>Date</b>: " + data.consolidated_weather[i].applicable_date;
+
+        Humidity[i].innerHTML =
+          "<b>Humidity</b>: " + data.consolidated_weather[i].humidity;
+        Visibilite[i].innerHTML =
+          "<b>Visibility</b>: " +
+          Math.trunc(data.consolidated_weather[i].visibility) +
+          " miles";
+        Pressure[i].innerHTML =
+          "<b>Pressure</b>: " +
+          Math.trunc(data.consolidated_weather[i].air_pressure) +
+          " mb";
+        Temp[i].innerHTML =
+          "<b>Temp</b>: " +
+          parseInt(data.consolidated_weather[i].the_temp) +
+          "°C";
+        Weather[i].innerHTML =
+          "<b>Weather</b>: " + data.consolidated_weather[i].weather_state_name;
+        let NameAbr = data.consolidated_weather[i].weather_state_abbr;
+        let weathersvg = document.querySelectorAll(".weathersvg");
+        console.log(NameAbr);
+        let URlsvg = `https://www.metaweather.com/static/img/weather/${NameAbr}.svg`;
+        // let URlsvg= `<img src=https://www.metaweather.com/static/img/weather/${NameAbr}.svg>`
+        weathersvg[i].src = URlsvg;
+      }
+    }
   }
 }
 
