@@ -72,7 +72,7 @@ function data_get() {
           "<b>Sun_rise</b> : " + data.sun_rise.substring(startIndex, endIndex);
         sunzet.innerHTML =
           "<b>Sun_set</b> : " + data.sun_set.substring(startIndex, endIndex);
-
+    
         Date[i].innerHTML =
           "<b>Date</b>: " + data.consolidated_weather[i].applicable_date;
 
