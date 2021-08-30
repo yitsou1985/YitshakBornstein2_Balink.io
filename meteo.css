@@ -32,7 +32,10 @@ body{
 
 .DisplayScreen{
    display: "flex";
+  justify-content: space-between;
    column-count:5;
+   
+   
   
    margin:auto
 
@@ -56,24 +59,24 @@ body{
     display: none;
 }
 
-/* @supports (display: flex) {
-  @media screen and (max-width: 300px) and (max-height:600px) {
-   body,.DisplayScreen {
-      display: 1fr ; 
-      
-    
-      
+@supports (display: flex) {
+  @media screen and (max-width: 600px) and (max-height:600px) {
+   .Screen {
+      display: 1fr ;
+      justify-content: space-between; 
+   
     }
 
   }
-} */
-@media screen and (max-width:600px) {
-  .DisplayScreen{
+}
+/* @media screen and (max-width:600px) {
+  .Screen{
     display: flex;
+    justify-content: space-between;
     grid-template-columns: repeat(auto-fit,minmax(1rem,1fr));
   }
   
-}
+} */
 /* .App {
     text-align: center;
   }
