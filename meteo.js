@@ -63,6 +63,7 @@ function data_get() {
         //   console.log(data.consolidated_weather[i].weather_state_name);
         let startIndex = data.time.indexOf("T") + 1;
         let endIndex = startIndex + 5;
+        
 
         cityAnd.innerHTML = data.title + " " + "(" + data.parent.title + ")";
 
@@ -74,7 +75,7 @@ function data_get() {
           "<b>Sun_set</b> : " + data.sun_set.substring(startIndex, endIndex);
     
         Date[i].innerHTML =
-          "<b>Date</b>: " + data.consolidated_weather[i].applicable_date;
+          "<b>Date</b>: " + data.consolidated_weather[i].applicable_date; 
 
         Humidity[i].innerHTML =
           "<b>Humidity</b>: " + data.consolidated_weather[i].humidity;
