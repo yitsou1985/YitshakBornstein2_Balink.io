@@ -12,16 +12,22 @@ function inputvalue(e) {
 
 function data_get() {
   let valuinput = input.value;
+  let loadingGif = document.getElementById("loadingGif");
+  loadingGif.hidden = false;
 
   fetch(
     `https://www.metaweather.com/api/location/search/?query=${valuinput}&units=metric`
   )
     .then((res) => {
+      loadingGif.hidden = true;
       return res.json();
+ 
     })
+    
     .then(woeid_data)
-
+   
     .catch((error) => {
+      loadingGif.hidden = true;
       input.value = "";
       alert("Please enter a valid City");
       // let erri = document.querySelector(".not_good")
@@ -36,6 +42,8 @@ function data_get() {
     fetch(`https://www.metaweather.com/api/location/${wooeid}`)
       .then((data) => {
         return data.json();
+       
+       
       })
       .then(displayBis)
       .catch((err) => console.log(""));
@@ -63,8 +71,10 @@ function data_get() {
         //   console.log(data.consolidated_weather[i].weather_state_name);
         let startIndex = data.time.indexOf("T") + 1;
         let endIndex = startIndex + 5;
-        
+       
 
+        
+        
         cityAnd.innerHTML = data.title + " " + "(" + data.parent.title + ")";
 
         timedata.innerHTML =
