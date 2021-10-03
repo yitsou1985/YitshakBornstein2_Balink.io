@@ -19,6 +19,10 @@ body{
 
     
    }  
+   .hr{
+background-color: linen;
+height: 1px;
+   }
      #loadingGif{
       align-items: center;
      }  
